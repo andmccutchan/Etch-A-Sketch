@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 16px;
+}
+
 h1 {
     text-align: center;
     margin: 10px 0;
@@ -20,6 +27,10 @@ h1 {
     margin-bottom: 20px;
 }
 
+.cell {
+    border: 1px solid hsl(0, 0%, 73%);
+}
+
 .btn {
     width: 150px;
     padding: 10px;
@@ -32,9 +43,7 @@ h1 {
 
 .container { 
     display: flex;
-    border: 2px solid;
-    width: 804px;
-    height: 804px;
-    margin: 0 auto;
     flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
 }

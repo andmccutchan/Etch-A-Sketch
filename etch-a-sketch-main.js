@@ -1,40 +1,57 @@
 const container = document.querySelector(".container");
 const gridBtn = document.querySelector(".grid-btn");
 const eraseBtn = document.querySelector(".erase-btn");
+const resetBtn = document.querySelector(".reset-btn");
+
+// Container size in px
+let containerSize = 960;
+
+container.style.width = `${containerSize}px`;
+container.style.height = `${containerSize}px`;
 
 
-// Render 16 x 16 grid on page
-// for (let i = 0; i < 256; i++) {
-//     const cell = document.createElement("div");
-//     cell.className = `cell cell-${i + 1}`;
-//     cell.style.width = "50px"
-//     cell.style.height = "50px";
-//     cell.style.border = "2px solid"
-//     container.appendChild(cell);
-//     cell.addEventListener("mouseenter", () => {
-//         cell.style.backgroundColor = "black";
-//     })
-//     cell.addEventListener('mouseleave', () => {
-//         cell.style.backgroundColor = "white";
-//     })
-// }
+
+const renderGrid = (size) => {
+    container.innerHTML = "";
+
+    const gridSize = size * size;
+
+    const gridSpace = 100 / size;
+
+    for (let i = 0; i < gridSize; i++) {
+        const cell = document.createElement("div");
+        cell.className = `cell cell-${i+1}`;
+        container.appendChild(cell);
+
+        cell.style.width = `${gridSpace}%`;
+        cell.style.height = `${gridSpace}%`;
+
+        let cellColorPercent = 90;
+
+        cell.addEventListener("mouseenter", (e) => {
+            e.preventDefault();
+            
+            cell.style.backgroundColor = `hsl(0, 0%, ${cellColorPercent}%)`;
+            cellColorPercent -= 10;
+        })
+
+        eraseBtn.addEventListener('click', () =>{
+            cell.style.backgroundColor = "white";
+        })
+    }
+}
+
+renderGrid(16);
 
 gridBtn.addEventListener('click', () => {
-    container.innerHTML = "";
-    const gridSize = Number(prompt("Enter a grid size"));
-    for (let i = 0; i < (gridSize**2); i++) {
-        const cell = document.createElement("div");
-        cell.className = `cell cell-${i + 1}`;
-        cell.style.width = `${800 / gridSize}px`;
-        cell.style.height = `${800 / gridSize}px`;
-        cell.style.border = "2px solid"
-        container.appendChild(cell);
-        cell.addEventListener("mouseenter", () => {
-            cell.style.backgroundColor = "black";
-        })
+    const newSize = Number(prompt("Enter a number"));
+    if (newSize > 100) {
+        alert("Please pick a number less than 100");
+    } else {
+        renderGrid(newSize);
     }
 })
 
-eraseBtn.addEventListener('click', () => {
-    for ()
+resetBtn.addEventListener('click', () => {
+    renderGrid(16);
 })
